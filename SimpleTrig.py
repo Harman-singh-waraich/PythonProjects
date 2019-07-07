@@ -25,7 +25,7 @@ def perimeter(a, b, c):
 
 def area(a, b, c):  # heron's formula
     s = perimeter(a, b, c) / 2
-    return math.round(math.sqrt(s * (s - a) * (s - b) * (s - c)), 3)
+    return round(math.sqrt(s * (s - a) * (s - b) * (s - c)), 3)
 
 
 EXPECTED_INPUTS = ["SSS", "SAS", "ASA", "AAS", "SSA"]  # Types of triangles that are solvable
