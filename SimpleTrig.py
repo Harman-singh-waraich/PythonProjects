@@ -1,22 +1,22 @@
-import math
+from math import *
 
 
-def cosineside(b, c, A):  # finds the length of side a
-    plug = b ** 2 + c ** 2 - 2 * b * c * math.cos(math.radians(A))
-    return round(math.sqrt(plug), 3)
+def cosine_side(b, c, A):  # finds the length of side a
+    plug = (b ** 2) + (c ** 2) -  (2 * b * c * cos(radians(A)))
+    return round(sqrt(plug), 3)
 
 
-def cosineangle(a, b, c):  # finds angle measure of A
+def cosine_angle(a, b, c):  # finds angle measure of A
     fraction = (b ** 2 + c ** 2 - a ** 2) / (2 * b * c)
-    return round(math.degrees(math.acos(fraction)), 3)
+    return round(degrees(acos(fraction)), 3)
 
 
-def sineangle(a, A, b):  # finds angle measure of B
-    return round(math.degrees(math.asin((b * math.sin(math.radians(A))) / a)), 3)
+def sine_angle(a, A, b):  # finds angle measure of B
+    return round(degrees(asin((b * sin(radians(A))) / a)), 3)
 
 
-def sineside(a, A, B):  # finds the length of side b
-    return round((a * math.sin(math.radians(B))) / (math.sin(math.radians(A))), 3)
+def sine_side(a, A, B):  # finds the length of side b
+    return round((a * sin(radians(B))) / (sin(radians(A))), 3)
 
 
 def perimeter(a, b, c):
@@ -25,13 +25,13 @@ def perimeter(a, b, c):
 
 def area(a, b, c):  # heron's formula
     s = perimeter(a, b, c) / 2
-    return round(math.sqrt(s * (s - a) * (s - b) * (s - c)), 3)
+    return round(sqrt(s * (s - a) * (s - b) * (s - c)), 3)
 
 
 EXPECTED_INPUTS = ["SSS", "SAS", "ASA", "AAS", "SSA"]  # Types of triangles that are solvable
 def main():
-    while True:  # input for what type of triangle is given
-        check = input("Enter type of triangle (SSS, SAS, ASA, AAS, SSA): ").upper()
+    while True:  # input for how the user want to input variables.
+        check = input("Enter parameters of triangle (SSS, SAS, ASA, AAS, SSA): ").upper()
         if check in EXPECTED_INPUTS:
          break
         else:
@@ -43,9 +43,9 @@ def main():
                 sideA = float(input("Enter length of side a: "))
                 sideB = float(input("Enter length of side b: "))
                 sideC = float(input("Enter length of side c: "))
-                angleA = cosineangle(sideA, sideB, sideC)
-                angleB = cosineangle(sideB, sideA, sideC)
-                angleC = cosineangle(sideC, sideA, sideB)
+                angleA = cosine_angle(sideA, sideB, sideC)
+                angleB = cosine_angle(sideB, sideA, sideC)
+                angleC = cosine_angle(sideC, sideA, sideB)
                 print('Angle A: {} Angle B: {} Angle C: {}'.format(angleA, angleB, angleC))
                 break
             except ValueError:
@@ -57,9 +57,9 @@ def main():
                 sideB = float(input("Enter length of side b: "))
                 A = float(input("Enter measure of A(degrees): "))
                 sideC = float(input("Enter length of side c: "))
-                sideA = cosineside(sideB, sideC, A)
-                angleB = sineangle(sideA, A, sideB)
-                angleC = sineangle(sideA, A, sideC)
+                sideA = cosine_side(sideB, sideC, A)
+                angleB = sine_angle(sideA, A, sideB)
+                angleC = sine_angle(sideA, A, sideC)
                 print('Side A: {} Angle B: {} Angle C: {}'.format(sideA, angleB, angleC))
                 break
             except ValueError:
@@ -72,8 +72,8 @@ def main():
                 sideC = float(input("Enter length of side c: "))
                 B = float(input("Enter measure of B(degrees): "))
                 angleC = round(180 - A - B, 3)
-                sideA = sineside(sideC, angleC, A)
-                sideB = sineside(sideC, angleC, B)
+                sideA = sine_side(sideC, angleC, A)
+                sideB = sine_side(sideC, angleC, B)
                 print('Side A: {} Side B: {} Angle C: {}'.format(sideA, sideB, angleC))
                 break
             except ValueError:
@@ -86,8 +86,8 @@ def main():
                 B = float(input("Enter measure of B(degrees): "))
                 sideA = float(input("Enter length of side a: "))
                 angleC = round(180 - A - B, 3)
-                sideB = sineside(sideA, A, B)
-                sideC = sineside(sideA, A, angleC)
+                sideB = sine_side(sideA, A, B)
+                sideC = sine_side(sideA, A, angleC)
                 print('Side B: {} Side C: {} Angle C: {}'.format(sideB, sideC, angleC))
                 break
             except ValueError:
@@ -99,15 +99,15 @@ def main():
                 sideB = float(input("Enter length of side b: "))
                 sideA = float(input("Enter length of side a: "))
                 A = float(input("Enter measure of A(degrees): "))
-                angleB = sineangle(sideA, A, sideB)
+                angleB = sine_angle(sideA, A, sideB)
                 angleC = round(180 - angleB - A, 3)
-                sideC = sineside(sideA, A, angleC)
+                sideC = sine_side(sideA, A, angleC)
                 print('Side c: {} Angle B: {} Angle C: {}'.format(sideC, angleB, angleC))
                 diff = (180 - angleB) + A
                 if diff < 180:
                     angleB = 180 - angleB
                     angleC = round(180 - angleB - A, 3)
-                    sideC = sineside(sideA, A, angleC)
+                    sideC = sine_side(sideA, A, angleC)
                     print('Side c: {} Angle B: {} Angle C: {} There are two solutions'.format(sideC, angleB, angleC))
                 break
             except ValueError:
