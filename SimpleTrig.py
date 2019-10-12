@@ -1,22 +1,22 @@
-import math
+from math import *
 
 
 def cosineside(b, c, A):  # finds the length of side a
-    plug = b ** 2 + c ** 2 - 2 * b * c * math.cos(math.radians(A))
-    return round(math.sqrt(plug), 3)
+    plug = b ** 2 + c ** 2 - 2 * b * c * cos(radians(A))
+    return round(sqrt(plug), 3)
 
 
 def cosineangle(a, b, c):  # finds angle measure of A
     fraction = (b ** 2 + c ** 2 - a ** 2) / (2 * b * c)
-    return round(math.degrees(math.acos(fraction)), 3)
+    return round(degrees(acos(fraction)), 3)
 
 
 def sineangle(a, A, b):  # finds angle measure of B
-    return round(math.degrees(math.asin((b * math.sin(math.radians(A))) / a)), 3)
+    return round(degrees(asin((b * sin(radians(A))) / a)), 3)
 
 
 def sineside(a, A, B):  # finds the length of side b
-    return round((a * math.sin(math.radians(B))) / (math.sin(math.radians(A))), 3)
+    return round((a * sin(radians(B))) / (sin(radians(A))), 3)
 
 
 def perimeter(a, b, c):
@@ -25,7 +25,7 @@ def perimeter(a, b, c):
 
 def area(a, b, c):  # heron's formula
     s = perimeter(a, b, c) / 2
-    return round(math.sqrt(s * (s - a) * (s - b) * (s - c)), 3)
+    return round(sqrt(s * (s - a) * (s - b) * (s - c)), 3)
 
 
 EXPECTED_INPUTS = ["SSS", "SAS", "ASA", "AAS", "SSA"]  # Types of triangles that are solvable
@@ -46,7 +46,7 @@ def main():
                 angleA = cosineangle(sideA, sideB, sideC)
                 angleB = cosineangle(sideB, sideA, sideC)
                 angleC = cosineangle(sideC, sideA, sideB)
-                print('Angle A: {} Angle B: {} Angle C: {}'.format(angleA, angleB, angleC))
+                print(f'Angle A: {angleA} Angle B: {angleB} Angle C: {angleC}')
                 break
             except ValueError:
                 print("Triangle does not exist. Try again.")
@@ -60,7 +60,7 @@ def main():
                 sideA = cosineside(sideB, sideC, A)
                 angleB = sineangle(sideA, A, sideB)
                 angleC = sineangle(sideA, A, sideC)
-                print('Side A: {} Angle B: {} Angle C: {}'.format(sideA, angleB, angleC))
+                print(f'Side A: {sideA} Angle B: {angleB} Angle C: {angleC}')
                 break
             except ValueError:
                 print("Triangle does not exist. Try again.")
@@ -74,7 +74,7 @@ def main():
                 angleC = round(180 - A - B, 3)
                 sideA = sineside(sideC, angleC, A)
                 sideB = sineside(sideC, angleC, B)
-                print('Side A: {} Side B: {} Angle C: {}'.format(sideA, sideB, angleC))
+                print(f'Side A: {sideA} Side B: {sideB} Angle C: {angleC}')
                 break
             except ValueError:
                 print("Triangle does not exist. Try again.")
@@ -88,7 +88,7 @@ def main():
                 angleC = round(180 - A - B, 3)
                 sideB = sineside(sideA, A, B)
                 sideC = sineside(sideA, A, angleC)
-                print('Side B: {} Side C: {} Angle C: {}'.format(sideB, sideC, angleC))
+                print(f'Side B: {sideB} Side C: {sideC} Angle C: {angleC}')
                 break
             except ValueError:
                 print("Triangle does not exist. Try again.")
@@ -102,24 +102,24 @@ def main():
                 angleB = sineangle(sideA, A, sideB)
                 angleC = round(180 - angleB - A, 3)
                 sideC = sineside(sideA, A, angleC)
-                print('Side c: {} Angle B: {} Angle C: {}'.format(sideC, angleB, angleC))
+                print(f'Side c: {sideC} Angle B: {angleB} Angle C: {angleC}')
                 diff = (180 - angleB) + A
                 if diff < 180:
                     angleB = 180 - angleB
                     angleC = round(180 - angleB - A, 3)
                     sideC = sineside(sideA, A, angleC)
-                    print('Side c: {} Angle B: {} Angle C: {} There are two solutions'.format(sideC, angleB, angleC))
+                    print(f'Side c: {sideC} Angle B: {angleB} Angle C: {angleC} There are two solutions')
                 break
             except ValueError:
                 print("Triangle does not exist")
 
     check = input("Would you like to know the perimeter (y/n)? ").lower()
     if check == "y":
-        print('Perimeter: {}'.format(perimeter(sideA, sideB, sideC)))
+        print(f'Perimeter: {perimeter(sideA, sideB ,sideC)}')
 
     check = input("Would you like to know the area (y/n)? ").lower()
     if check == "y":
-        print('Area: {}'.format(area(sideA, sideB, sideC)))
+        print(f'Area: {area(sideA, sideB, sideC)}')
 
 
 if __name__ == '__main__':
